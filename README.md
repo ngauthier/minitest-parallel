@@ -1,20 +1,20 @@
-= MiniTest::Parallel
+# MiniTest::Parallel
 
-== Usage
+## Usage
 
-  require 'minitest/parallel'
+    require 'minitest/parallel'
 
-  # optionally set the number of processors
-  MiniTest::Parallel.processor_count = 2
-  # if you don't set the number of processors, it
-  # defaults to the number of processors in your
-  # system
+    # optionally set the number of processors
+    MiniTest::Parallel.processor_count = 2
+    # if you don't set the number of processors, it
+    # defaults to the number of processors in your
+    # system
 
 You MUST require minitest/parallel before you require any other minitest
 files. MiniTest::Parallel is a monkeypatch, and therefore requires a
 specific version of the MiniTest gem to be activated.
 
-== Gotchas
+## Gotchas
 
 MiniTest::Parallel runs your tests in parallel. That means if you try to access
 a shared object (like a database, or a third-party service) you need to
