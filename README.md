@@ -1,5 +1,9 @@
 # MiniTest::Parallel
 
+## Installation
+
+Sorry! I haven't made it into a gem yet. Next thing on my list I promise.
+
 ## Usage
 
     require 'minitest/parallel'
