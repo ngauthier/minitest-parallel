@@ -1,9 +1,7 @@
+# https://github.com/ngauthier/minitest-parallel
 if defined?(MiniTest)
   raise "Do not require minitest before minitest/parallel\n"
 end
-require 'rubygems'
-gem 'minitest', '=2.0.1'
-gem 'parallel', '=0.5.1'
 require 'parallel'
 require 'minitest/unit'
 
@@ -24,9 +22,19 @@ module MiniTest::Parallel
   end
 
   def _run_suites_in_parallel(suites, type)
-    Parallel.map(suites, :in_processes => MiniTest::Parallel.processor_count) do |suite|
-      _run_suite(suite, type)
+    result = Parallel.map(suites, :in_processes => MiniTest::Parallel.processor_count) do |suite|
+      ret = _run_suite(suite, type)
+      {
+        :failures         => failures,
+        :errors           => errors,
+        :report           => report,
+        :run_suite_return => ret
+      }
     end
+    self.failures = result.inject(0)  {|sum, x| sum + x[:failures] }
+    self.errors   = result.inject(0)  {|sum, x| sum + x[:errors] }
+    self.report   = result.inject([]) {|sum, x| sum + x[:report] }
+    result.map {|x| x[:run_suite_return] }
   end
 end
 
