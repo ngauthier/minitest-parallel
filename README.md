@@ -1,4 +1,4 @@
-# MiniTest::Parallel
+# MiniTest::Parallel [![Build Status](http://travis-ci.org/ngauthier/minitest-parallel.png)](http://travis-ci.org/ngauthier/minitest-parallel)
 
 ## Installation
 
